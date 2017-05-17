@@ -6,7 +6,7 @@ import { successRateActions } from './successRate.redux$';
 const SuccessRate = props => {
   const { successCount, failCount, fail, succeed, reset } = props;
   const tryCount = successCount + failCount;
-  const successRate = tryCount === 0 ? 0 : ~~(successCount * 1000 / tryCount) / 10;
+  const successRate = tryCount === 0 ? 0 : Math.round(successCount * 1000 / tryCount) / 10;
   return (
     <div>
       <h1>Pot Success: <span className="text-info">{successRate}%</span></h1>
@@ -25,7 +25,7 @@ SuccessRate.propTypes = {
   reset: PropTypes.func.isRequired
 };
 export default connect(state => ({
-  ...state.successRate,
+  ...state,
   succeed() {
     successRateActions.succeed$.next();
   },

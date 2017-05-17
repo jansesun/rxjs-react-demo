@@ -4,10 +4,18 @@ import PropTypes from 'prop-types';
 export const createState = function(reducer$, initialState$ = Rx.Observable.of({})) {
   return initialState$
     .merge(reducer$)
-    .scan((state, [scope, reducer]) => {
+    .scan((state, stream) => {
+      if(Array.isArray(reducer)) {
+        const [scope, reducer] = stream;
+        return {
+          ...state,
+          [scope]: reducer(state[scope])
+        };
+      }
+      const reducer = stream;
       return {
         ...state,
-        [scope]: reducer(state[scope])
+        ...reducer(state)
       };
     })
     .shareReplay();
