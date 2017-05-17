@@ -1,7 +1,7 @@
 # rxjs-react-demo
 Simple way to connect rxjs to React component in Redux style
 
-```
+```js
 export default connect(state => {
   ...state.successRate,
   succeed() {
