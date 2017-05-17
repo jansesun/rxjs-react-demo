@@ -5,7 +5,7 @@ export const createState = function(reducer$, initialState$ = Rx.Observable.of({
   return initialState$
     .merge(reducer$)
     .scan((state, stream) => {
-      if(Array.isArray(reducer)) {
+      if(Array.isArray(stream)) {
         const [scope, reducer] = stream;
         return {
           ...state,
