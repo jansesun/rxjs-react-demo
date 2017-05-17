@@ -1,2 +1,27 @@
 # rxjs-react-demo
-A demo with react with rxjs
+Simple way to connect rxjs to React component in Redux style
+
+```
+export default connect(state => {
+  ...state.successRate,
+  succeed() {
+    successRateActions.succeed$.next();
+  },
+  fail() {
+    successRateActions.fail$.next();
+  },
+  reset() {
+    successRateActions.reset$.next();
+  }
+})(SuccessRate);
+```
+
+Start Server
+```
+npm start
+```
+
+Unit Test
+```
+npm test
+```

@@ -34,5 +34,5 @@ export default connect(state => ({
   },
   reset() {
     successRateActions.reset$.next();
-  },
+  }
 }))(SuccessRate);
