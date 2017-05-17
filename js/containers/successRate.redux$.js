@@ -11,7 +11,7 @@ const initialState = {
 };
 const successRateReducer$ = Rx.Observable.of(() => initialState)
   .merge(
-    successRateActions.succeed$.map(()=> state => ({
+    successRateActions.succeed$.map(() => state => ({
       ...state,
       successCount: state.successCount + 1
     })),

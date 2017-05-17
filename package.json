@@ -4,7 +4,8 @@
   "description": "A demo with react and rxjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-register ./js/test"
   },
   "repository": {
     "type": "git",
@@ -32,8 +33,11 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.24.1",
+    "expect": "^1.20.2",
     "express": "^4.15.2",
     "html-webpack-plugin": "^2.28.0",
+    "mocha": "^3.4.1",
     "pug": "^2.0.0-rc.1",
     "pug-loader": "^2.3.0",
     "webpack": "^2.5.1",

@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 export const createState = function(reducer$, initialState$ = Rx.Observable.of({})) {
   return initialState$
     .merge(reducer$)
-    .scan((state, reducer) => {
+    .scan((state, [scope, reducer]) => {
       return {
-        ...reducer(state)
+        ...state,
+        [scope]: reducer(state[scope])
       };
     })
     .shareReplay();
@@ -53,4 +54,8 @@ export class RxStateProvider extends Component {
   render() {
     return this.props.children;
   }
+};
+export const combineReducers = function(reducers$) {
+  const newReducers$ = Object.keys(reducers$).map(key => reducers$[key].map(payload => [key, payload]));
+  return Rx.Observable.merge(...newReducers$);
 };

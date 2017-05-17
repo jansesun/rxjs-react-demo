@@ -25,7 +25,7 @@ SuccessRate.propTypes = {
   reset: PropTypes.func.isRequired
 };
 export default connect(state => ({
-  ...state,
+  ...state.successRate,
   succeed() {
     successRateActions.succeed$.next();
   },
