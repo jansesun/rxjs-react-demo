@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from '../state/RxState';
 import { successRateActions } from './successRate.redux$';
 
-const SuccessRate = props => {
+export const SuccessRate = props => {
   const { successCount, failCount, fail, succeed, reset } = props;
   const tryCount = successCount + failCount;
   const successRate = tryCount === 0 ? 0 : Math.round(successCount * 1000 / tryCount) / 10;

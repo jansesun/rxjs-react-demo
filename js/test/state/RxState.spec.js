@@ -1,6 +1,8 @@
 import expect from 'expect';
 import Rx from 'rxjs/Rx';
-import { combineReducers, createActions, createState } from '../../state/RxState';
+import React from 'react';
+import { mount } from 'enzyme';
+import { combineReducers, createActions, createState, RxStateProvider, connect } from '../../state/RxState';
 import successRateReducer$, { successRateActions } from '../../containers/successRate.redux$';
 
 describe('RxState', () => {
@@ -81,6 +83,34 @@ describe('RxState', () => {
       });
       add$.next(2);
       add$.complete();
+    });
+  });
+  describe('connect', () => {
+    it('should map state to props in RxStateProvider context', () => {
+      const add$ = new Rx.Subject();
+      const CounterReducer$ = add$.map(payload => state => ({
+        ...state,
+        counter: state.counter + payload
+      }));
+      const state$ = createState(CounterReducer$, Rx.Observable.of({ counter: 10 }));
+      const Counter = ({ counter, add }) => (
+        <div>
+          <h1>{counter}</h1>
+          <button onClick={add}>add</button>
+        </div>
+      );
+      const ConnectedCounter = connect(state => ({
+        ...state,
+        add: () => add$.next(1)
+      }))(Counter);
+      const tree = mount(
+        <RxStateProvider state$={state$}>
+          <ConnectedCounter />
+        </RxStateProvider>
+      );
+      expect(tree.find('h1').text()).toBe('10');
+      tree.find('button').simulate('click');
+      expect(tree.find('h1').text()).toBe('11');
     });
   });
 });
