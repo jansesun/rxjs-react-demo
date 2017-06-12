@@ -1,5 +1,5 @@
 import Rx from 'rxjs/Rx';
-import { createActions } from '../state/RxState';
+import { createActions } from 'redux-react-rxjs';
 
 // Actions
 export const successRateActions = createActions(['succeed$', 'fail$', 'reset$']);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from '../state/RxState';
+import { connect } from 'redux-react-rxjs';
 import { successRateActions } from './successRate.redux$';
 
 export const SuccessRate = props => {
