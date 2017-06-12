@@ -10,8 +10,7 @@ module.exports = {
     publicPath: '//localhost:3000/static/'
   },
   entry: {
-    'successRate': ['./js/page/successRate'],
-    'draw': ['./js/page/draw']
+    'successRate': ['./js/page/successRate']
   },
   module: {
     rules: [
@@ -33,12 +32,6 @@ module.exports = {
       template: './jade/index.jade',
       inject: true,
       chunks: ['successRate']
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'draw.html',
-      template: './jade/draw.jade',
-      inject: true,
-      chunks: ['draw']
     })
   ],
   resolve: {
